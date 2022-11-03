@@ -1,4 +1,5 @@
 version: 2
+name: DependaBot
 updates:
   - package-ecosystem: pip
     directory: "/"
