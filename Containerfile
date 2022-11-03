@@ -41,7 +41,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
   fi
 
 RUN dnf update -y \
-  && dnf install -y glibc-langpack-en python39-pip \
+  && dnf install -y glibc-langpack-en \
   && dnf clean all \
   && rm -rf /var/cache/{dnf,yum} \
   && rm -rf /var/lib/dnf/history.* \
