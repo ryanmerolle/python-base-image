@@ -33,7 +33,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
     dnf install -y epel-release dnf-plugins-core ; \
     dnf config-manager --set-disabled epel ; \
     dnf config-manager --set-enabled powertools ; \
-    dnf module enable -y python39-devel ; \
+    dnf module enable -y python39-devel python3-pip ; \
     dnf clean all ; \
     rm -rf /var/cache/{dnf,yum} ; \
     rm -rf /var/lib/dnf/history.* ; \
