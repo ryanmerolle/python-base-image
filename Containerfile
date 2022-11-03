@@ -33,7 +33,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
     dnf install -y epel-release dnf-plugins-core ; \
     dnf config-manager --set-disabled epel ; \
     dnf config-manager --set-enabled powertools ; \
-    dnf module enable -y python38-devel ; \
+    dnf module enable -y python39-devel ; \
     dnf clean all ; \
     rm -rf /var/cache/{dnf,yum} ; \
     rm -rf /var/lib/dnf/history.* ; \
@@ -41,7 +41,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
   fi
 
 RUN dnf update -y \
-  && dnf install -y glibc-langpack-en python38-pip \
+  && dnf install -y glibc-langpack-en python39-pip \
   && dnf clean all \
   && rm -rf /var/cache/{dnf,yum} \
   && rm -rf /var/lib/dnf/history.* \
@@ -49,7 +49,7 @@ RUN dnf update -y \
 
 # NOTE(pabelanger): We do this to allow users to install python36 but not
 # change python3 to python36.
-RUN alternatives --set python3 /usr/bin/python3.8
+RUN alternatives --set python3 /usr/bin/python3.9
 
 # Upgrade pip to fix wheel cache for locally built wheels.
 # See https://github.com/pypa/pip/issues/6852
