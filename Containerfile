@@ -52,9 +52,10 @@ RUN dnf update -y \
 
 # Upgrade pip to fix wheel cache for locally built wheels.
 # See https://github.com/pypa/pip/issues/6852
+# hadolint ignore=DL3013
 RUN python3 -m pip install --no-cache-dir -U pip
 
-# hadolint ignore=DL3041,DL3013
+# hadolint ignore=DL3041,DL3013,SC3009
 RUN dnf update -y \
   && dnf install -y gcc \
   && pip install dumb-init --no-cache-dir -c constraints.txt \
