@@ -50,6 +50,10 @@ RUN dnf update -y \
   && rm -rf /var/lib/dnf/history.* \
   && rm -rf /var/log/*
 
+# Set python & pip3 alternatives
+RUN alternatives --set python /usr/bin/python3 && \
+  alternatives --set pip3 /usr/local/bin/pip
+
 # Upgrade pip to fix wheel cache for locally built wheels.
 # See https://github.com/pypa/pip/issues/6852
 # hadolint ignore=DL3013
