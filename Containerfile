@@ -47,10 +47,6 @@ RUN dnf update -y \
   && rm -rf /var/lib/dnf/history.* \
   && rm -rf /var/log/*
 
-# NOTE(pabelanger): We do this to allow users to install python36 but not
-# change python3 to python36.
-RUN alternatives --set python3 /usr/bin/python3.9
-
 # Upgrade pip to fix wheel cache for locally built wheels.
 # See https://github.com/pypa/pip/issues/6852
 RUN python3 -m pip install --no-cache-dir -U pip
