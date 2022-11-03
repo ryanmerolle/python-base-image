@@ -17,6 +17,7 @@ ARG CONTAINER_IMAGE=quay.io/centos/centos:stream9
 ARG REMOTE_SOURCE=.
 ARG REMOTE_SOURCE_DIR=/remote-source
 
+# hadolint ignore=DL3006
 FROM $CONTAINER_IMAGE
 # ============================================================================
 ARG CONTAINER_IMAGE
@@ -28,6 +29,7 @@ WORKDIR $REMOTE_SOURCE_DIR/app
 RUN echo "install_weak_deps=False" >> /etc/dnf/dnf.conf \
     && echo "tsflags=nodocs" >> /etc/dnf/dnf.conf
 
+# hadolint ignore=SC3009
 RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
     dnf update -y ; \
     dnf install -y epel-release dnf-plugins-core ; \
@@ -40,6 +42,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
     rm -rf /var/log/* ; \
   fi
 
+# hadolint ignore=DL3041,SC3009
 RUN dnf update -y \
   && dnf install -y glibc-langpack-en python3-pip \
   && dnf clean all \
@@ -51,6 +54,7 @@ RUN dnf update -y \
 # See https://github.com/pypa/pip/issues/6852
 RUN python3 -m pip install --no-cache-dir -U pip
 
+# hadolint ignore=DL3041,DL3013
 RUN dnf update -y \
   && dnf install -y gcc \
   && pip install dumb-init --no-cache-dir -c constraints.txt \
