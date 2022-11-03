@@ -41,7 +41,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
   fi
 
 RUN dnf update -y \
-  && dnf install -y glibc-langpack-en \
+  && dnf install -y glibc-langpack-en python3-pip \
   && dnf clean all \
   && rm -rf /var/cache/{dnf,yum} \
   && rm -rf /var/lib/dnf/history.* \
@@ -53,7 +53,7 @@ RUN python3 -m pip install --no-cache-dir -U pip
 
 RUN dnf update -y \
   && dnf install -y gcc \
-  && pip3 install dumb-init --no-cache-dir -c constraints.txt \
+  && pip install dumb-init --no-cache-dir -c constraints.txt \
   && dnf remove -y gcc \
   && dnf clean all \
   && rm -rf /var/cache/{dnf,yum} \
