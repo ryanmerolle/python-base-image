@@ -1,0 +1,4 @@
+krb5
+setuptools
+virtualenv
+wheel

@@ -44,7 +44,7 @@ RUN if [[ "$CONTAINER_IMAGE" =~ "centos" ]] ; then \
 
 # hadolint ignore=DL3041,SC3009
 RUN dnf update -y \
-  && dnf install -y glibc-langpack-en python3-pip \
+  && dnf install -y gcc glibc-langpack-en python3-pip libpq-devel -y python3-setuptools-wheel python3-pip-wheel python3-devel python3-pip krb5-devel \
   && dnf clean all \
   && rm -rf /var/cache/{dnf,yum} \
   && rm -rf /var/lib/dnf/history.* \
@@ -57,7 +57,7 @@ RUN python3 -m pip install --no-cache-dir -U pip
 
 # hadolint ignore=DL3041,DL3013,SC3009
 RUN dnf update -y \
-  && dnf install -y gcc \
+  && python3 -m pip install --no-cache-dir -r requirements.txt \
   && pip install dumb-init --no-cache-dir -c constraints.txt \
   && dnf remove -y gcc \
   && dnf clean all \
